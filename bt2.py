@@ -1,130 +1,96 @@
 import torch
-from llama_cpp import Llama
-from modules.text_analysis.analyzer import TextAnalyzer
 import json
 import time
 import warnings
-import numpy as np
 import random
+from modules.text_analysis.analyzer import TextAnalyzer
+from modules.utils.io import read_from_text_file, append_results_to_json
+from modules.utils.llm_helpers import check_gpu_memory, sample_llm_conf
 
+# Suppress irrelevant warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+# Configuration for the script
+DEFAULT_CONFIG = {
+    "model_path": "models/Llama-3.2-3B-Instruct-Q6_K_L.gguf",  # Default model path
+    "text_input_path": "data/processed/extracted_text.txt",  # Path to input text file
+    "output_file": "data/output/results.json",  # Main JSON output file
+    "default_modes": [
+        "chain_of_thought",
+        "general",
+        "few_shot",
+    ],  # Available prompt modes
+    "default_llm_conf": {
+        "temperature": 0.2,
+        "repetition_penalty": 1.11,
+        "top_p": 0.95,
+        "n_gpu_layers": 21,
+    },
+}
 
-def check_gpu_memory():
-    allocated_memory = torch.cuda.memory_allocated() / 1024**3  # Convert to GB
-    reserved_memory = torch.cuda.memory_reserved() / 1024**3  # Convert to GB
-    print(f"Memory Allocated: {allocated_memory} GB")
-    print(f"Memory Reserved: {reserved_memory} GB")
+
+# Function to analyze text using a specified model and configuration
+def analyze_text(context, model_path, mode="general", llm_conf=None):
+    """
+    Analyzes the given text context with a specified model and mode.
+    """
+    if llm_conf is None:
+        llm_conf = DEFAULT_CONFIG["default_llm_conf"]
+
+    analyzer = TextAnalyzer(context, model_path, llm_conf)
+    check_gpu_memory()
+
+    response1 = analyzer.analyze(mode=mode, context=context)
+    check_gpu_memory()
+
+    response2 = analyzer.summarize(response1)
+    check_gpu_memory()
+
+    return response1, response2
 
 
-def sample_llm_conf():
-    # Define the sampling ranges for each parameter
-    temp_range = (0.0, 1.0)  # temp typically between 0 and 1
-    rp_range = (1.0, 1.2)  # rp could range between 0 and 3 (just as an example)
-    topp_range = (0.9, 0.97)  # topp typically between 0 and 1
+# Main script execution
+if __name__ == "__main__":
+    # Load configuration
+    config = DEFAULT_CONFIG
+    model_path = config["model_path"]
+    text_input_path = config["text_input_path"]
+    output_file = config["output_file"]
+    modes = config["default_modes"]
 
-    # Randomly sample values within these ranges
-    llm_conf = {
-        "temp": round(random.uniform(*temp_range), 2),
-        "rp": round(random.uniform(*rp_range), 2),
-        "topp": round(random.uniform(*topp_range), 2),
+    # Randomly select a mode and sample model configurations
+    mode = random.choice(modes)
+    llm_conf = sample_llm_conf()
+    print(f"Selected Mode: {mode}")
+    print(f"LLM Configuration: {llm_conf}")
+
+    # Read input context
+    context = read_from_text_file(text_input_path)
+
+    # Record start time
+    start_time = time.time()
+
+    # Perform analysis
+    response1, response2 = analyze_text(context, model_path, mode, llm_conf)
+
+    # Calculate processing time
+    elapsed_time = round(time.time() - start_time, 4)
+
+    # Create structured output data
+    result_data = {
+        "model": model_path,
+        "mode": mode,
+        "context": config["text_input_path"],
+        "llm_configuration": llm_conf,
+        "responses": {
+            "analysis": response1,
+            "summary": response2,
+        },
+        "processing_time_seconds": elapsed_time,
     }
 
-    return llm_conf
+    # Append results to the main JSON file
+    append_results_to_json(output_file, result_data)
 
-
-def analyze_text(
-    context,
-    model_path,
-    mode="general",
-    llm_conf={"temp": 0.2, "rp": 1.11, "topp": 0.95},
-):
-
-    llm = Llama(
-        model_path=model_path,  # Download the model file first
-        n_ctx=5000,  # The max sequence length to use
-        n_threads=12,  # CPU threads
-        n_gpu_layers=87,  # Number of layers to offload to GPU
-        temperature=llm_conf["temp"],
-        repetition_penalty=llm_conf["rp"],
-        top_p=llm_conf["topp"],
-    )
-
-    analyzer = TextAnalyzer(context, llm)
-    response = analyzer.analyze(
-        mode=mode,
-    )  # Example using general prompt mode
-    check_gpu_memory()
-
-    # Clear GPU memory after use
-    del llm
-    torch.cuda.empty_cache()
-    check_gpu_memory()
-
-    return response
-
-
-def read_from_text_file(filename="output.txt"):
-    """
-    Reads the extracted text from a plain text file.
-
-    :param filename: The name of the text file to read.
-    :return: The content of the text file as a string.
-    """
-    try:
-        # Open the file in read mode and ensure UTF-8 encoding
-        with open(filename, "r", encoding="utf-8") as file:
-            extracted_text = file.read()  # Read the entire content of the file
-        print(f"Extracted text has been read from {filename}")
-        return extracted_text
-    except Exception as e:
-        print(f"Error reading from file: {e}")
-        return None
-
-
-def write_to_text_file(extracted_text, filename="output.txt"):
-    """
-    Writes the extracted text to a plain text file.
-
-    :param extracted_text: The text to be written to the file.
-    :param filename: The name of the text file where the content will be saved.
-    """
-    try:
-        # Open the file in write mode and ensure UTF-8 encoding
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write(extracted_text)
-        print(f"Extracted text has been written to {filename}")
-    except Exception as e:
-        print(f"Error writing to file: {e}")
-
-
-if __name__ == "__main__":
-    input_path = (
-        "data/processed/extracted_text.txt"  # Path to the JSON file with extracted text
-    )
-
-    t2t_llm = "models/Llama-3.2-3B-Instruct-Q6_K_L.gguf"
-    # Define your list of modes
-    modes = ["chain_of_thought", "general", "few_shot"]
-    # Choose a random mode from the list
-    mode = random.choice(modes)
-    print("PROMPT MODE", mode)
-
-    check_gpu_memory()
-    t0 = time.time()
-    llm_conf = sample_llm_conf()
-    # llm_conf = {"temp": 0.2, "rp": 1.11, "topp": 0.95}
-    temperature = llm_conf["temp"]
-    repetition_penalty = llm_conf["rp"]
-    top_p = llm_conf["topp"]
-    print(llm_conf)
-    extracted_text = read_from_text_file(input_path)
-    response = analyze_text(extracted_text, t2t_llm, mode, llm_conf)
-
-    tid = round(time.time() - t0, 4)
-    mname = t2t_llm.strip("models/").replace(".", "")
-    write_to_text_file(
-        response,
-        filename=f"data/output/t2t_output_{mname}_{mode}_{tid}_t{temperature}_r{repetition_penalty}_p{top_p}.txt",
-    )
-    print(response)
+    print(f"Results appended to: {output_file}")
+    print(f"Processing completed in {elapsed_time} seconds.")

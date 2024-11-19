@@ -1,11 +1,17 @@
+from llama_cpp import Llama
+import torch
+
+
 class TextAnalyzer:
-    def __init__(self, context, llm):
+    def __init__(self, model_path, llm_conf):
         """
         Initialize the TextAnalyzer with context, input question, and LLM.
         """
-        self.context = context
-
-        self.llm = llm  # The language model instance, e.g., OpenAI, HuggingFace, etc.
+        self.llm_conf = llm_conf
+        self.model_path = model_path
+        self.load_llm(
+            self.llm_conf, self.model_path
+        )  # The language model instance, e.g., OpenAI, HuggingFace, etc.
 
         # Define the general prompt structure as a template
         self.general_structure = """
@@ -98,33 +104,82 @@ class TextAnalyzer:
         {context}
         """
 
-    def generate_prompt(self, mode):
+        self.summary_prompt = """You are a health analysis assistant tasked with interpreting blood test results. Focus on identifying **abnormal readings** in the provided data and give a detailed explanation of the potential causes and health implications for these abnormalities. Provide context-specific details about what the abnormal readings might indicate about the dog's health, including **possible conditions** or **diseases** they could be associated with.
+
+        Only recommend **specific next steps** if the abnormalities clearly suggest that further medical tests or actions are required. These steps could include re-checking the results, scheduling specific diagnostic exams, or addressing underlying health concerns. Avoid general guidelines unless absolutely necessary.
+
+        List and explain the **specific molecules** with abnormal readings, and only recommend next steps if the abnormalities suggest the need for additional investigations.
+
+        Answer the following question in **no more than 5 sentences**:
+
+        **Main Question**: Based on the blood test results, what are the key health implications of the abnormalities, and what specific next steps should be taken, if any?
+
+        Context:
+        {context}
+        """
+
+    def unload_llm(self):
+        del self.llm
+        torch.cuda.empty_cache()
+
+    def load_llm(self, llm_conf, model_path):
+
+        self.llm = Llama(
+            model_path=model_path,  # Download the model file first
+            n_ctx=5000,  # The max sequence length to use
+            n_threads=12,  # CPU threads
+            n_gpu_layers=llm_conf["n_gpu_layers"],  # Number of layers to offload to GPU
+            temperature=llm_conf["temperature"],
+            repetition_penalty=llm_conf["repetition_penalty"],
+            top_p=llm_conf["top_p"],
+        )
+
+    def generate_analyzer_prompt(self, mode, context):
         """
         Generate the appropriate prompt based on the selected mode.
         :param mode: The mode to be used ('chain_of_thought', 'few_shot', or 'general')
         :return: The generated prompt
         """
         if mode == "chain_of_thought":
-            return self.cot_prompt.format(context=self.context)
+            return self.cot_prompt.format(context=context)
 
         elif mode == "few_shot":
-            return self.few_shot_prompt.format(context=self.context)
+            return self.few_shot_prompt.format(context=context)
 
         elif mode == "general":
             return self.general_structure.format(
-                context=self.context, input=self.input_question
+                context=context, input=self.input_question
             )
 
         else:
             return "Invalid mode."
 
-    def analyze(self, mode):
+    def generate_summarizer_prompt(self, context):
+        """
+        Generate the appropriate prompt based on the selected mode.
+        :param mode: The mode to be used ('chain_of_thought', 'few_shot', or 'general')
+        :return: The generated prompt
+        """
+        return self.summary_prompt.format(context=context)
+
+    def analyze(self, mode, context):
         """
         Analyze the input question using the selected mode and return the generated prompt.
         :param mode: The mode to be used ('chain_of_thought', 'few_shot', or 'general')
         :return: The generated prompt for the analysis
         """
-        prompt = self.generate_prompt(mode)
+        prompt = self.generate_analyzer_prompt(mode, context)
+        # Now call inference with the generated prompt
+        result = self.llm_inference(prompt)
+        return result
+
+    def summarize(self, context):
+        """
+        Analyze the input question using the selected mode and return the generated prompt.
+        :param mode: The mode to be used ('chain_of_thought', 'few_shot', or 'general')
+        :return: The generated prompt for the analysis
+        """
+        prompt = self.generate_summarizer_prompt(context)
         # Now call inference with the generated prompt
         result = self.llm_inference(prompt)
         return result

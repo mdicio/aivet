@@ -1,7 +1,7 @@
 #my exclusions
 data/
 models/
-AutoAWQ/
+external_libs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,0 +1,187 @@
+Certainly, here is the extracted information from the blood test report:
+
+- Chemical Name: Creatine Kinase (CPK) (IU/L)
+  - Detected Level: 217
+  - Normal Range: 45 - 155
+
+- Chemical Name: Alanine Aminotransferase (AST) (IU/L)
+  - Detected Level: 36
+  - Normal Range: 10 - 45
+
+- Chemical Name: Aspartate Aminotransferase (ALT) (IU/L)
+  - Detected Level: 83
+  - Normal Range: 10 - 60
+
+- Chemical Name: Alkaline Phosphatase (ALP) (IU/L)
+  - Detected Level: 2780
+  - Normal Range: 45 - 152
+
+- Chemical Name: Gamma-Glutamyl Transpeptidase (GGT) (IU/L)
+  - Detected Level: 3,0
+  - Normal Range: 0,1 - 13
+
+- Chemical Name: Bilirubina Tot (mg/dl)
+  - Detected Level: 0,10
+  - Normal Range: 0,10 - 0,44
+
+- Chemical Name: Proteine Tot (g/dl)
+  - Detected Level: 7,2
+  - Normal Range: 5,8 - 8,0
+
+- Chemical Name: Albumine (g/dl)
+  - Detected Level: 3,26
+  - Normal Range: 2,6 - 3,8
+
+- Chemical Name: Globuline (g/dl)
+  - Detected Level: 3,90
+  - Normal Range: 2,6 - 4,5
+
+- Chemical Name: Rapp. Alb/Glob
+  - Detected Level: 0,84
+  - Normal Range: 0,84 - 1,91
+
+- Chemical Name: Colesterolo (mg/dl)
+  - Detected Level: 201
+  - Normal Range: 120 - 300
+
+- Chemical Name: Trigliceridi (mg/dl)
+  - Detected Level: 158
+  - Normal Range: 30 - 95
+
+- Chemical Name: Amilasi (IU/L)
+  - Detected Level: 836
+  - Normal Range: 200 - 1900
+
+- Chemical Name: Lipasi (IU/L)
+  - Detected Level: 64
+  - Normal Range: 10 - 350
+
+- Chemical Name: UREA (mg/dl)
+  - Detected Level: 21
+  - Normal Range: 15 - 45
+
+- Chemical Name: CREA (mg/dl)
+  - Detected Level: 0,69
+  - Normal Range: 0,60 - 1,80
+
+- Chemical Name: Glucosio (mg/dl)
+  - Detected Level: 88
+  - Normal Range: 70 - 110
+
+- Chemical Name: Calcio (mg/dl)
+  - Detected Level: 9,80
+  - Normal Range: 8,0 - 12,0
+
+- Chemical Name: Acido Urico (mg/dl)
+  - Detected Level: 0,2
+  - Normal Range: 0,2 - 1
+
+- Chemical Name: Fosforo (mg/dl)
+  - Detected Level: 3,90
+  - Normal Range: 2,5 - 5,6
+
+- Chemical Name: Sodio (mEq/L)
+  - Detected Level: 150
+  - Normal Range: 144 - 155
+
+- Chemical Name: Potassio (mEq/L)
+  - Detected Level: 4,9
+  - Normal Range: 3,3 - 5,4
+
+- Chemical Name: Rapp. Na/K
+  - Detected Level: 30,61
+  - Normal Range: > 27
+
+- Chemical Name: Magnesio (mg/dl)
+  - Detected Level: 111
+  - Normal Range: 1,60 - 2,48
+
+- Chemical Name: Calcio Ionio (mmol/L)
+  - Detected Level: 1,50
+  - Normal Range: 0,97 - 1,34
+
+- Chemical Name: Cloro corr. (mEq/L)
+  - Detected Level: 108,04
+  - Normal Range: 108,04 - 118
+
+- Chemical Name: HCO3 (mEq/L)
+  - Detected Level: 21
+  - Normal Range: 17,0 - 25,2
+
+- Chemical Name: Div. anionico
+  - Detected Level: 23
+  - Normal Range: 12,0 - 24,0
+
+- Chemical Name: Osmolarità cal. (mOsm)
+  - Detected Level: 322
+  - Normal Range: 314 - 335
+
+- Chemical Name: Ferro (μg/dl)
+  - Detected Level: 114
+  - Normal Range: 100 - 280
+
+- Chemical Name: UBC (μg/dl)
+  - Detected Level: 330
+  - Normal Range: 150 - 350
+
+- Chemical Name: TIBC (μg/dl)
+  - Detected Level: 444
+  - Normal Range: 300 - 510
+
+- Chemical Name: Saturazione (%)
+  - Detected Level: 25,68
+  - Normal Range: 30 - 60
+
+- Chemical Name: Ferritina (ng/ml)
+  - Detected Level: 21
+  - Normal Range: 20 - 78
+
+- Chemical Name: Aptoglobina HPT (mg/dl)
+  - Detected Level: 20
+  - Normal Range: 60 - 9
+
+- Chemical Name: Ac. Billari pre (μmol/L)
+  - Detected Level: 0,3
+  - Normal Range: 0,3 - 0,6
+
+- Chemical Name: Ac. Billari post (μmol/L)
+  - Detected Level: 0,6
+  - Normal Range: 0,6 - 0,6
+
+- Chemical Name: Alfa 2 Macroglobulina (g/L)
+  - Detected Level: 2282
+  - Normal Range: 0,02 - 0,65
+
+- Chemical Name: Cistatina (mg/L)
+  - Detected Level: 0,02
+  - Normal Range: 3350 - 6550
+
+- Chemical Name: Coleinesterasi (IU/L)
+  - Detected Level: 188
+  - Normal Range: 30 - 398
+
+- Chemical Name: LDH (IU/L)
+  - Detected Level: 351
+  - Normal Range: 0,2 - 9,0
+
+- Chemical Name: Fruttosamina (μmol/L)
+  - Detected Level: 0,2
+  - Normal Range: 4,95 - 9,0
+
+- Chemical Name: Lattato (mg/dl)
+  - Detected Level: 1
+  - Normal Range: 0,01 - 0,10
+
+- Chemical Name: Ceruloplasmina (mg/dl)
+  - Detected Level: 5,6
+  - Normal Range: 0,01 - 0,10
+
+- Chemical Name: Proteina C Reatt. (mg/dl)
+  - Detected Level: 0,01
+  - Normal Range: 0,01 - 0,10
+
+- Chemical Name: AGP (mg/ml)
+  - Detected Level: 0,01
+  - Normal Range: 0,01 - 0,10
+
+Please note that the normal ranges provided in the report are for reference only and may vary depending on the laboratory and the specific tests conducted. <|endoftext|>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Image Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+
+<body>
+    <h1>Upload an Image for Processing</h1>
+
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+        <label for="file">Choose an image:</label>
+        <input type="file" id="file" name="file" accept="image/*, .pdf" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <hr>
+
+    {% if filename %}
+    <h2>Uploaded Image: {{ filename }}</h2>
+    <img src="{{ url_for('static', path='uploads/' + filename) }}" alt="Uploaded Image" width="300">
+    <h3>Processed Output:</h3>
+    <pre>{{ output }}</pre>
+    <hr>
+    {% endif %}
+</body>
+
+</html>

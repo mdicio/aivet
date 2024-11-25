@@ -1,0 +1,16 @@
+ Here are the molecules that fall outside the normal range:
+
+* Creatine Kinase (CPK): Detected Level: 217 (Outside: 155 - 45)
+* Alkaline Phosphatase (ALP): Detected Level: 2780 (Outside: 152 - 45)
+* Amilasi (IU/L): Detected Level: 836 (Outside: 1900 - 200)
+* Lipasi (IU/L): Detected Level: 64 (Outside: 350 - 10)
+* Cistatina (mg/L): Detected Level: 2282 (Outside: 6550 - 3350)
+* Coleinesterasi (IU/L): Detected Level: 30 (Outside: 351 - 188)
+* LDH (IU/L): Detected Level: 188 (Outside: 398 - 351)
+* Proteina C Reatt. (mg/dl): Detected Level: 0.01 (Outside: 4.95 - 0.10)
+* AGP (mg/ml): Detected Level: 0.01 (Outside: 4.95 - 0.10)
+* CREA (mg/dl): Detected Level: 0.69 (Outside: 1.80 - 0.60)
+
+Based on the detected abnormalities, the dog appears to have elevated levels of creatine kinase (CPK), alkaline phosphatase (ALP), and several enzyme levels, including amilasi, lipasi, coleinesterasi, LDH, proteina C Reatt., AGP, and cistatina. These results suggest liver damage or disease. Additionally, the elevated crea level and high levels of lipasi, coleinesterasi, and LDH may indicate liver damage or disease. The dog may require a thorough medical examination and further testing to determine the underlying cause of these abnormalities. 
+
+Please note that the provided context only includes the analysis of blood test results and does not take into account other possible factors that may be contributing to the dog's condition. A veterinarian should be consulted for a proper diagnosis and treatment plan.

@@ -1,5 +1,5 @@
 #my exclusions
-data/
+# data/
 models/
 external_libs/
 

@@ -1,3 +1,7 @@
+import fitz  # PyMuPDF
+import json
+
+
 def read_from_text_file(filename="output.txt"):
     """
     Reads the extracted text from a plain text file.
@@ -51,3 +55,19 @@ def append_results_to_json(output_file, result_data):
     # Write the updated results back to the file
     with open(output_file, "w") as json_file:
         json.dump(results, json_file, indent=4)
+
+
+def convert_pdf_to_images(pdf_path, output_dir):
+    pdf_document = fitz.open(pdf_path)
+    images = []
+
+    for page_num in range(len(pdf_document)):
+        # Render the page to a PIL image
+        page = pdf_document[page_num]
+        pix = page.get_pixmap()
+        image_path = output_dir / f"page_{page_num + 1}.png"
+        pix.save(image_path)
+        images.append(str(image_path))
+
+    pdf_document.close()
+    return images

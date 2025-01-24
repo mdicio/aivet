@@ -4,38 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
-    <style>
-        .result-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .image-box {
-            max-width: 500px;
-        }
-    </style>
+    <title>AI Vet Analysis - Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
 </head>
 
 <body>
-    <h1>Text Extraction and Analysis Result</h1>
+    <div class="container">
+        <h1>Analysis Result</h1>
 
-    <h2>Original Image</h2>
-    <div class="image-box">
-        <img src="/static/uploads/{{ image_path }}" alt="Uploaded Image" style="max-width: 100%;">
+        <h2>Original Image</h2>
+        <div class="image-box">
+            <img src="/static/uploads/{{ image_path }}" alt="Uploaded Image" style="max-width: 100%;">
+        </div>
+
+        <div class="result-box">
+            <h3>Analysis</h3>
+            <p>{{ analysis }}</p>
+        </div>
+
+        <div class="result-box">
+            <h3>Summary</h3>
+            <div id="summary-content">
+                {{ summary | safe }}
+            </div>
+        </div>
+
+        <a href="/"><button>Upload Another File</button></a>
     </div>
-
-    <div class="result-box">
-        <h3>Analysis</h3>
-        <p>{{ analysis }}</p>
-    </div>
-
-    <div class="result-box">
-        <h3>Summary</h3>
-        <p>{{ summary }}</p>
-    </div>
-
 </body>
 
 </html>

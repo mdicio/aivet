@@ -70,7 +70,7 @@ if __name__ == "__main__":
     output_file = args.output
 
     # Model path can be passed or set to default
-    model_path = "models/Llama-3.2-3B-Instruct-Q6_K_L.gguf"
+    model_path = DEFAULT_CONFIG["model_path"]
     try:
         analyze_text(input_text_file, output_file, model_path)
         print(f"Text analysis completed, saved to {output_file}")

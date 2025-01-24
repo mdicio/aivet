@@ -10,8 +10,13 @@ eval "$(pyenv virtualenv-init -)"
 input_image=$1
 echo input image $input_image
 output_image_dir="app/static/uploads"
-output_text_file="data/output/extracted_text.txt"  # Path to the extracted text file
-output_json_file="data/output/results.json"  # Path to the output results file
+
+# Clear the uploads folder (but not the folder itself)
+echo "Clearing uploads folder..."
+rm -rf "$output_image_dir"/*
+
+output_text_file="app/static/uploads/extracted_text.txt"  # Path to the extracted text file
+output_json_file="app/static/uploads/results.json"  # Path to the output results file
 
 # Step 1: Activate the first pyenv environment (Image-to-Text model)
 echo "Activating the first pyenv environment (aivet)..."

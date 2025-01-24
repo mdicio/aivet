@@ -4,28 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastAPI Image Upload</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <title>AI Vet App</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
 </head>
 
 <body>
-    <h1>Upload an Image for Processing</h1>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo">AI Vet</h1>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#upload">Get Started</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-    <form action="/upload/" method="post" enctype="multipart/form-data">
-        <label for="file">Choose an image:</label>
-        <input type="file" id="file" name="file" accept="image/*, .pdf" required>
-        <button type="submit">Upload</button>
-    </form>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Revolutionize Your Veterinary Analysis</h1>
+                <p>Upload images and PDFs to get instant AI-powered insights into veterinary cases.</p>
+                <a href="#upload" class="btn-primary">Get Started</a>
+            </div>
+        </section>
 
-    <hr>
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Why Choose AI Vet?</h2>
+                <div class="feature-cards">
+                    <div class="card">
+                        <h3>AI-Powered Insights</h3>
+                        <p>Leverage cutting-edge AI to analyze veterinary images and provide actionable insights.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Easy to Use</h3>
+                        <p>Upload your files in seconds and get results fast with our intuitive interface.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Secure and Private</h3>
+                        <p>All your data is encrypted and processed securely to ensure confidentiality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    {% if filename %}
-    <h2>Uploaded Image: {{ filename }}</h2>
-    <img src="{{ url_for('static', path='uploads/' + filename) }}" alt="Uploaded Image" width="300">
-    <h3>Processed Output:</h3>
-    <pre>{{ output }}</pre>
-    <hr>
-    {% endif %}
+        <section id="upload" class="upload">
+            <div class="container">
+                <h2>Get Started</h2>
+                <p>Upload an image or PDF to begin analysis.</p>
+                <form action="/upload/" method="post" enctype="multipart/form-data" class="upload-form">
+                    <input type="file" id="file" name="file" accept="image/*, .pdf" required>
+                    <button type="submit" class="btn-primary">Upload File</button>
+                    <p id="status"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 AI Vet App. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#upload">Get Started</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', path='js/scripts.js') }}"></script>
 </body>
 
 </html>

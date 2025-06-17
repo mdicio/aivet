@@ -17,17 +17,17 @@ class ImageToTextExtractor:
         )
         self.query = """Task: Extract and list all blood test details.
 
-Objective:
-1. Identify and extract **chemical names** from the blood test report.
-2. Capture the **detected levels** of each chemical.
-3. Extract the **normal range** for each corresponding chemical.
+    Objective:
+    1. Identify and extract **chemical names** from the blood test report.
+    2. Capture the **detected levels** of each chemical.
+    3. Extract the **normal range** for each corresponding chemical.
 
-Expected Output Format:
-- Chemical Name: [Name]
-  - Detected Level: [Value]
-  - Normal Range: [Min Value] - [Max Value]
+    Expected Output Format:
+    - Chemical Name: [Name]
+    - Detected Level: [Value]
+    - Normal Range: [Min Value] - [Max Value]
 
-Please ensure accurate extraction, including any unit symbols (e.g., mg/dL, IU/L), and handle variations in formatting or alignment. Return results in a structured list format for easy readability."""
+    Please ensure accurate extraction, including any unit symbols (e.g., mg/dL, IU/L), and handle variations in formatting or alignment. Return results in a structured list format for easy readability."""
 
     def load_model(self):
         """

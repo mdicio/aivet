@@ -1,0 +1,5 @@
+{
+    "editor.formatOnSave": true,
+    "python.analysis.autoFormatStrings": true,
+    "notebook.formatOnSave.enabled": true
+}

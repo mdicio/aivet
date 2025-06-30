@@ -36,3 +36,12 @@ SpeechRecognition
 tqdm
 transformers
 pypdf
+torch
+torchvision
+accelerate
+bitsandbytes
+pytesseract
+pdfplumber
+unstructured
+unstructured[all-docs]
+onnx

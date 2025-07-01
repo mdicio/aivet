@@ -2,6 +2,8 @@
 # data/
 models/
 external_libs/
+*chroma_db/
+*.chroma.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
